@@ -146,6 +146,12 @@ Names that only a service mesh can resolve — such as Istio <code>ServiceEntry<
 The traffic-agent imposed a hard-coded 250 millisecond timeout on the DNS lookups it performs on behalf of a connected client. A resolution that needs search-path expansion, or that passes through a service-mesh DNS proxy such as Istio's, can easily take longer, causing spurious <code>NXDOMAIN</code> answers on the workstation. The agent now honors the deadline of the calling client, which is governed by the <code>dns.lookupTimeout</code> client setting.
 </div>
 
+## <div style="display:flex;"><img src="images/feature.png" alt="feature" style="width:30px;height:fit-content;"/><div style="display:flex;margin-left:7px;">Show ingress URLs for intercepted service ports</div></div>
+<div style="margin-left: 15px">
+
+The output of <code>telepresence intercept</code> and <code>telepresence list</code> now shows the ingress URLs through which an intercepted service port can be reached. When the intercept uses HTTP header filters, a ready-to-paste <code>curl</code> example with the matching <code>-H</code> flags is included, making it easy to send a request that is routed to the intercept handler on the workstation.
+</div>
+
 ## Version 2.28.0 <span style="font-size: 16px;">(May 11)</span>
 ## <div style="display:flex;"><img src="images/feature.png" alt="feature" style="width:30px;height:fit-content;"/><div style="display:flex;margin-left:7px;">[Intercept workloads in mapped namespaces](reference/engagements/cli)</div></div>
 <div style="margin-left: 15px">

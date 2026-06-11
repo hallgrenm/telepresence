@@ -201,6 +201,7 @@ func (s *State) checkInterceptConsistency(
 		return err
 	}
 	pi.ServiceUid = string(ic.ServiceUID)
+	pi.ServiceName = ic.ServiceName
 	pi.ServicePortName = ic.ServicePortName
 	pi.Protocol = ic.Protocol.String()
 	pi.ContainerPort = int32(ic.ContainerPort)
@@ -581,7 +582,9 @@ func (s *State) restoreAppContainer(ctx context.Context, ii *rpc.InterceptInfo, 
 			cn, _, err = icept.FindIntercept(sc, spec)
 		}
 		if err != nil || cn.Replace == desiredPolicy {
-			return nil, nil
+			// No change is needed. Return the unchanged config rather than nil, because
+			// a nil return value would delete the config from the map.
+			return sc, nil
 		}
 		cn.Replace = desiredPolicy
 
